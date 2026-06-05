@@ -11,8 +11,128 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			/* Lightbox styles */
+			.lightbox {
+				display: none;
+				position: fixed;
+				z-index: 9999;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.9);
+				animation: fadeIn 0.3s;
+			}
+
+			.lightbox.active {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.lightbox-content {
+				position: relative;
+				max-width: 90vw;
+				max-height: 90vh;
+				animation: zoomIn 0.3s;
+			}
+
+			.lightbox-image {
+				max-width: 100%;
+				max-height: 90vh;
+				object-fit: contain;
+			}
+
+			.lightbox-close {
+				position: absolute;
+				top: 20px;
+				right: 30px;
+				color: #f1f1f1;
+				font-size: 40px;
+				font-weight: bold;
+				cursor: pointer;
+				line-height: 1;
+			}
+
+			.lightbox-close:hover,
+			.lightbox-close:focus {
+				color: #bbb;
+			}
+
+			@keyframes fadeIn {
+				from { opacity: 0; }
+				to { opacity: 1; }
+			}
+
+			@keyframes zoomIn {
+				from { transform: scale(0.8); }
+				to { transform: scale(1); }
+			}
+
+			/* Clickable image styles */
+			img.clickable {
+				cursor: pointer;
+				transition: opacity 0.2s;
+			}
+
+			img.clickable:hover {
+				opacity: 0.8;
+			}
+
+			/* Scrollable container for Case 2 images */
+			.ndvi-scroll-container {
+				display: flex;
+				gap: 0.8em;
+				overflow-x: auto;
+				padding: 0.5em 0;
+				border: 1px solid #ddd;
+				border-radius: 4px;
+				background-color: #f9f9f9;
+			}
+
+			.ndvi-scroll-container img {
+				flex: 0 0 auto;
+				width: 200px;
+				height: auto;
+				object-fit: contain;
+			}
+
+			/* Scrollbar styling */
+			.ndvi-scroll-container::-webkit-scrollbar {
+				height: 8px;
+			}
+
+			.ndvi-scroll-container::-webkit-scrollbar-track {
+				background: #f1f1f1;
+				border-radius: 10px;
+			}
+
+			.ndvi-scroll-container::-webkit-scrollbar-thumb {
+				background: #888;
+				border-radius: 10px;
+			}
+
+			.ndvi-scroll-container::-webkit-scrollbar-thumb:hover {
+				background: #555;
+			}
+
+			/* Firefox scrollbar */
+			.ndvi-scroll-container {
+				scrollbar-color: #888 #f1f1f1;
+				scrollbar-width: thin;
+			}
+		</style>
 	</head>
 	<body class="is-preload">
+
+		<!-- Lightbox Modal -->
+		<div id="lightbox" class="lightbox">
+			<div class="lightbox-content">
+				<span class="lightbox-close">&times;</span>
+				<img id="lightbox-image" class="lightbox-image" src="" alt="">
+			</div>
+		</div>
 
 		<!-- Sidebar -->
 			<section id="sidebar">
@@ -72,7 +192,7 @@
 
 									<!-- Image below the case -->
 									<div style="margin-top: 2em;">
-										<img src="images/Supervised Crop Classification.jfif" alt="Supervised Crop Classification Map" style="max-width: 100%; height: auto; display: block;" />
+										<img src="images/Supervised Crop Classification.jfif" alt="Supervised Crop Classification Map" class="clickable" style="max-width: 50%; height: auto; display: block;" />
 									</div>
 								</div>
 							</div>
@@ -106,13 +226,16 @@
 										<p><strong>Stack:</strong> ArcGIS / QGIS · Sentinel-2 / Landsat · NDVI time-series analysis · Thematic cartography</p>
 									</div>
 
-									<!-- Images on the right, vertically stacked -->
-									<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 0.8em;">
-										<img src="images/2002.jfif" alt="NDVI 2002" style="max-width: 100%; height: auto;" />
-										<img src="images/2015.jfif" alt="NDVI 2015" style="max-width: 100%; height: auto;" />
-										<img src="images/2019.jfif" alt="NDVI 2019" style="max-width: 100%; height: auto;" />
-										<img src="images/2024.jfif" alt="NDVI 2024" style="max-width: 100%; height: auto;" />
-										<img src="images/2002-2024.jfif" alt="NDVI change 2002 to 2024" style="max-width: 100%; height: auto;" />
+									<!-- Scrollable images container -->
+									<div style="flex: 1 1 280px;">
+										<p style="margin-bottom: 0.8em; font-size: 0.9em; color: #666;">Scroll to view all NDVI time-series maps →</p>
+										<div class="ndvi-scroll-container">
+											<img src="images/2002.jfif" alt="NDVI 2002" class="clickable" />
+											<img src="images/2015.jfif" alt="NDVI 2015" class="clickable" />
+											<img src="images/2019.jfif" alt="NDVI 2019" class="clickable" />
+											<img src="images/2024.jfif" alt="NDVI 2024" class="clickable" />
+											<img src="images/2002-2024.jfif" alt="NDVI change 2002 to 2024" class="clickable" />
+										</div>
 									</div>
 
 								</div>
@@ -128,10 +251,10 @@
 									
 									<!-- Horizontal row of 4 images -->
 									<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8em; margin-top: 2em;">
-										<img src="images/mg1.jfif" alt="Map Gallery 1" style="max-width: 100%; height: auto; display: block;" />
-										<img src="images/north4.jpg" alt="Map Gallery 2" style="max-width: 100%; height: auto; display: block;" />
-										<img src="images/zhamb3.jfif" alt="Map Gallery 3" style="max-width: 100%; height: auto; display: block;" />
-										<img src="images/kaz2.jfif" alt="Map Gallery 4" style="max-width: 100%; height: auto; display: block;" />
+										<img src="images/mg1.jfif" alt="Map Gallery 1" class="clickable" style="max-width: 100%; height: auto; display: block;" />
+										<img src="images/north4.jpg" alt="Map Gallery 2" class="clickable" style="max-width: 100%; height: auto; display: block;" />
+										<img src="images/zhamb3.jfif" alt="Map Gallery 3" class="clickable" style="max-width: 100%; height: auto; display: block;" />
+										<img src="images/kaz2.jfif" alt="Map Gallery 4" class="clickable" style="max-width: 100%; height: auto; display: block;" />
 									</div>
 								</div>
 							</div>
@@ -228,7 +351,7 @@
 												<li><a href="https://www.linkedin.com/in/anastasia-mokienko-4a57b5358" target="_blank" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
 												<li><a href="https://github.com/cdtjkieghk" target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
 												<li><a href="https://t.me/gisprofessional" target="_blank" class="icon brands fa-telegram"><span class="label">Telegram</span></a></li>
-												<li><a href="https://wa.me/77073347209" target="_blank" class="icon brands fa-whatsapp"><span class="label">WhatsApp</span></a></li>
+												<li><a href="https://www.facebook.com/profile.php?id=100089185870445" target="_blank" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
 											</ul>
 										</li>
 									</ul>
@@ -257,6 +380,42 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+
+			<script>
+				// Lightbox functionality
+				const lightbox = document.getElementById('lightbox');
+				const lightboxImage = document.getElementById('lightbox-image');
+				const lightboxClose = document.querySelector('.lightbox-close');
+				const clickableImages = document.querySelectorAll('img.clickable');
+
+				// Open lightbox when clicking on images
+				clickableImages.forEach(img => {
+					img.addEventListener('click', function() {
+						lightbox.classList.add('active');
+						lightboxImage.src = this.src;
+						lightboxImage.alt = this.alt;
+					});
+				});
+
+				// Close lightbox when clicking the X button
+				lightboxClose.addEventListener('click', function() {
+					lightbox.classList.remove('active');
+				});
+
+				// Close lightbox when clicking outside the image
+				lightbox.addEventListener('click', function(e) {
+					if (e.target === lightbox) {
+						lightbox.classList.remove('active');
+					}
+				});
+
+				// Close lightbox with Escape key
+				document.addEventListener('keydown', function(e) {
+					if (e.key === 'Escape') {
+						lightbox.classList.remove('active');
+					}
+				});
+			</script>
 
 	</body>
 </html>
