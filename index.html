@@ -80,47 +80,105 @@
 				opacity: 0.8;
 			}
 
-			/* Scrollable container for Case 2 images */
-			.ndvi-scroll-container {
-				display: flex;
-				gap: 0.8em;
-				overflow-x: auto;
-				padding: 0.5em 0;
+			/* Carousel container for Case 2 images */
+			.ndvi-carousel-wrapper {
+				position: relative;
+				margin-top: 1em;
+			}
+
+			.ndvi-carousel-container {
+				position: relative;
+				overflow: hidden;
 				border: 1px solid #ddd;
 				border-radius: 4px;
 				background-color: #f9f9f9;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				min-height: 300px;
 			}
 
-			.ndvi-scroll-container img {
-				flex: 0 0 auto;
-				width: 200px;
-				height: auto;
+			.ndvi-carousel-inner {
+				display: flex;
+				transition: transform 0.5s ease-in-out;
+				width: 100%;
+				height: 100%;
+			}
+
+			.ndvi-carousel-item {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex: 0 0 100%;
+				min-height: 300px;
+				padding: 1em;
+			}
+
+			.ndvi-carousel-item img {
+				max-width: 100%;
+				max-height: 400px;
 				object-fit: contain;
 			}
 
-			/* Scrollbar styling */
-			.ndvi-scroll-container::-webkit-scrollbar {
-				height: 8px;
+			/* Carousel arrows */
+			.ndvi-carousel-arrow {
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				background-color: rgba(0, 0, 0, 0.5);
+				color: white;
+				border: none;
+				font-size: 30px;
+				padding: 10px 15px;
+				cursor: pointer;
+				border-radius: 4px;
+				transition: background-color 0.3s;
+				z-index: 10;
 			}
 
-			.ndvi-scroll-container::-webkit-scrollbar-track {
-				background: #f1f1f1;
-				border-radius: 10px;
+			.ndvi-carousel-arrow:hover {
+				background-color: rgba(0, 0, 0, 0.8);
 			}
 
-			.ndvi-scroll-container::-webkit-scrollbar-thumb {
-				background: #888;
-				border-radius: 10px;
+			.ndvi-carousel-arrow.left {
+				left: 10px;
 			}
 
-			.ndvi-scroll-container::-webkit-scrollbar-thumb:hover {
-				background: #555;
+			.ndvi-carousel-arrow.right {
+				right: 10px;
 			}
 
-			/* Firefox scrollbar */
-			.ndvi-scroll-container {
-				scrollbar-color: #888 #f1f1f1;
-				scrollbar-width: thin;
+			.ndvi-carousel-arrow:disabled {
+				opacity: 0.3;
+				cursor: not-allowed;
+			}
+
+			.ndvi-carousel-arrow:disabled:hover {
+				background-color: rgba(0, 0, 0, 0.5);
+			}
+
+			/* Carousel dots indicator */
+			.ndvi-carousel-dots {
+				position: absolute;
+				bottom: 10px;
+				left: 50%;
+				transform: translateX(-50%);
+				display: flex;
+				gap: 8px;
+				z-index: 10;
+			}
+
+			.ndvi-carousel-dot {
+				width: 10px;
+				height: 10px;
+				border-radius: 50%;
+				background-color: rgba(255, 255, 255, 0.5);
+				cursor: pointer;
+				transition: background-color 0.3s;
+			}
+
+			.ndvi-carousel-dot.active {
+				background-color: rgba(255, 255, 255, 0.9);
 			}
 		</style>
 	</head>
@@ -226,15 +284,37 @@
 										<p><strong>Stack:</strong> ArcGIS / QGIS · Sentinel-2 / Landsat · NDVI time-series analysis · Thematic cartography</p>
 									</div>
 
-									<!-- Scrollable images container -->
+									<!-- Carousel for images -->
 									<div style="flex: 1 1 280px;">
-										<p style="margin-bottom: 0.8em; font-size: 0.9em; color: #666;">Scroll to view all NDVI time-series maps →</p>
-										<div class="ndvi-scroll-container">
-											<img src="images/2002.jfif" alt="NDVI 2002" class="clickable" />
-											<img src="images/2015.jfif" alt="NDVI 2015" class="clickable" />
-											<img src="images/2019.jfif" alt="NDVI 2019" class="clickable" />
-											<img src="images/2024.jfif" alt="NDVI 2024" class="clickable" />
-											<img src="images/2002-2024.jfif" alt="NDVI change 2002 to 2024" class="clickable" />
+										<div class="ndvi-carousel-wrapper">
+											<div class="ndvi-carousel-container">
+												<button class="ndvi-carousel-arrow left" id="ndvi-prev">❮</button>
+												<div class="ndvi-carousel-inner" id="ndvi-carousel-inner">
+													<div class="ndvi-carousel-item">
+														<img src="images/2002.jfif" alt="NDVI 2002" class="clickable" />
+													</div>
+													<div class="ndvi-carousel-item">
+														<img src="images/2015.jfif" alt="NDVI 2015" class="clickable" />
+													</div>
+													<div class="ndvi-carousel-item">
+														<img src="images/2019.jfif" alt="NDVI 2019" class="clickable" />
+													</div>
+													<div class="ndvi-carousel-item">
+														<img src="images/2024.jfif" alt="NDVI 2024" class="clickable" />
+													</div>
+													<div class="ndvi-carousel-item">
+														<img src="images/2002-2024.jfif" alt="NDVI change 2002 to 2024" class="clickable" />
+													</div>
+												</div>
+												<button class="ndvi-carousel-arrow right" id="ndvi-next">❯</button>
+												<div class="ndvi-carousel-dots">
+													<span class="ndvi-carousel-dot active" data-index="0"></span>
+													<span class="ndvi-carousel-dot" data-index="1"></span>
+													<span class="ndvi-carousel-dot" data-index="2"></span>
+													<span class="ndvi-carousel-dot" data-index="3"></span>
+													<span class="ndvi-carousel-dot" data-index="4"></span>
+												</div>
+											</div>
 										</div>
 									</div>
 
@@ -415,6 +495,57 @@
 						lightbox.classList.remove('active');
 					}
 				});
+
+				// Carousel functionality
+				const carouselInner = document.getElementById('ndvi-carousel-inner');
+				const prevBtn = document.getElementById('ndvi-prev');
+				const nextBtn = document.getElementById('ndvi-next');
+				const dots = document.querySelectorAll('.ndvi-carousel-dot');
+				let currentIndex = 0;
+				const totalItems = 5;
+
+				function updateCarousel() {
+					const offset = currentIndex * 100;
+					carouselInner.style.transform = `translateX(-${offset}%)`;
+					
+					// Update dots
+					dots.forEach((dot, index) => {
+						if (index === currentIndex) {
+							dot.classList.add('active');
+						} else {
+							dot.classList.remove('active');
+						}
+					});
+
+					// Update button states
+					prevBtn.disabled = currentIndex === 0;
+					nextBtn.disabled = currentIndex === totalItems - 1;
+				}
+
+				prevBtn.addEventListener('click', function() {
+					if (currentIndex > 0) {
+						currentIndex--;
+						updateCarousel();
+					}
+				});
+
+				nextBtn.addEventListener('click', function() {
+					if (currentIndex < totalItems - 1) {
+						currentIndex++;
+						updateCarousel();
+					}
+				});
+
+				// Dot click functionality
+				dots.forEach(dot => {
+					dot.addEventListener('click', function() {
+						currentIndex = parseInt(this.dataset.index);
+						updateCarousel();
+					});
+				});
+
+				// Initialize carousel
+				updateCarousel();
 			</script>
 
 	</body>
