@@ -180,6 +180,28 @@
 			.ndvi-carousel-dot.active {
 				background-color: rgba(255, 255, 255, 0.9);
 			}
+
+			/* Separate image below carousel */
+			.ndvi-change-image {
+				margin-top: 1.5em;
+				text-align: center;
+			}
+
+			.ndvi-change-image p {
+				margin-bottom: 0.8em;
+				font-size: 0.9em;
+				color: #666;
+				font-weight: 600;
+			}
+
+			.ndvi-change-image img {
+				max-width: 100%;
+				height: auto;
+				border: 1px solid #ddd;
+				border-radius: 4px;
+				background-color: #f9f9f9;
+				padding: 0.5em;
+			}
 		</style>
 	</head>
 	<body class="is-preload">
@@ -302,9 +324,6 @@
 													<div class="ndvi-carousel-item">
 														<img src="images/2024.jfif" alt="NDVI 2024" class="clickable" />
 													</div>
-													<div class="ndvi-carousel-item">
-														<img src="images/2002-2024.jfif" alt="NDVI change 2002 to 2024" class="clickable" />
-													</div>
 												</div>
 												<button class="ndvi-carousel-arrow right" id="ndvi-next">❯</button>
 												<div class="ndvi-carousel-dots">
@@ -312,9 +331,14 @@
 													<span class="ndvi-carousel-dot" data-index="1"></span>
 													<span class="ndvi-carousel-dot" data-index="2"></span>
 													<span class="ndvi-carousel-dot" data-index="3"></span>
-													<span class="ndvi-carousel-dot" data-index="4"></span>
 												</div>
 											</div>
+										</div>
+
+										<!-- Separate image below carousel -->
+										<div class="ndvi-change-image">
+											<p>NDVI Change Analysis (2002–2024)</p>
+											<img src="images/2002-2024.jfif" alt="NDVI change 2002 to 2024" class="clickable" />
 										</div>
 									</div>
 
@@ -502,7 +526,7 @@
 				const nextBtn = document.getElementById('ndvi-next');
 				const dots = document.querySelectorAll('.ndvi-carousel-dot');
 				let currentIndex = 0;
-				const totalItems = 5;
+				const totalItems = 4;
 
 				function updateCarousel() {
 					const offset = currentIndex * 100;
