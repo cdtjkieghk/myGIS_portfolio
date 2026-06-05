@@ -1,0 +1,262 @@
+<!DOCTYPE HTML> 
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Anastasia Mokienko - GIS & Cartography Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Sidebar -->
+			<section id="sidebar">
+				<div class="inner">
+					<nav>
+						<ul>
+							<li><a href="#intro">About Me</a></li>
+							<li><a href="#one">Projects & Cases</a></li>
+							<li><a href="#two">Skills & Experience</a></li>
+							<li><a href="#three">Contact</a></li>
+						</ul>
+					</nav>
+				</div>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Intro -->
+					<section id="intro" class="wrapper style1 fullscreen fade-up">
+						<div class="inner">
+							<h1>Anastasia Mokienko</h1>
+							<p>I turn satellite data into decisions.</p>
+							<p>As a GIS and Cartography Specialist with a background in geology, I work at the intersection of spatial science and applied machine learning — processing SAR imagery, classifying agricultural landscapes, and building the cartographic products that make complex data legible for stakeholders.</p>
+							<p>My background in earth sciences isn't decorative. It shapes how I read terrain, interpret spectral signatures, and ask the right questions before touching a single dataset. I bring that domain logic into every project — whether I'm running a chunk-based Random Forest classifier in Python or producing a thematic map layout for mineral exploration.</p>
+							<p>I'm actively growing my skills in web GIS and geospatial automation, and I'm open to remote roles where precision, reliability, and spatial curiosity are what the team needs most.</p>
+							<ul class="actions">
+								<li><a href="#one" class="button scrolly">View My Projects</a></li>
+							</ul>
+						</div>
+					</section>
+
+				<!-- One (Projects) -->
+					<section id="one" class="wrapper style2 spotlights">
+						
+						<!-- Case 1 -->
+						<section>
+							<div class="content" style="width: 100%;">
+								<div class="inner">
+									<h2>From SAR Scene to Crop Map: Automated Agricultural Classification, Atbasar Region</h2>
+									
+									<h3>The problem</h3>
+									<p>Mapping crop distribution across large agricultural areas is time-intensive when done manually, and optical imagery is unreliable in cloudy or rain-heavy seasons. The task required a scalable, weather-independent approach to identifying crop types across the Atbasar region for Summer 2021.</p>
+									
+									<h3>The approach</h3>
+									<ul>
+										<li>Built an end-to-end pipeline using three Sentinel-1 SLC scenes. Preprocessing in ESA SNAP covered debursting, radiometric calibration, terrain correction, covariance matrix generation, and model-based polarimetric decomposition (surface, volume, double-bounce). Output: a multi-channel GeoTIFF combining SAR backscatter and decomposition layers across all acquisition dates.</li>
+										<li>Extracted pixel-level training data from field polygons and prepared labelled samples for supervised learning.</li>
+										<li>Trained a Random Forest classifier in Python using chunk-based processing to handle large multi-date rasters without memory constraints.</li>
+										<li>Applied post-classification filtering to remove noise and isolated misclassified regions.</li>
+									</ul>
+									
+									<h3>The result</h3>
+									<p>The model reliably identified wheat distribution across the study area. Barley mapping was excluded from the final output due to insufficient training samples — a deliberate decision that preserved map accuracy over false precision. The pipeline demonstrated strong potential for multi-season SAR crop monitoring with expanded reference data.</p>
+									
+									<p><strong>Stack:</strong> ESA SNAP · Python (scikit-learn, rasterio, NumPy) · Sentinel-1 SLC</p>
+
+									<!-- Image below the case -->
+									<div style="margin-top: 2em;">
+										<img src="images/Supervised Crop Classification.jfif" alt="Supervised Crop Classification Map" style="max-width: 100%; height: auto; display: block;" />
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<!-- Case 2 -->
+						<section>
+							<div class="content" style="width: 100%;">
+								<div class="inner" style="display: flex; flex-wrap: wrap; gap: 3em; align-items: flex-start;">
+									
+									<!-- Text block -->
+									<div style="flex: 1 1 400px;">
+										<h2>Quantifying Two Decades of Urban Greening: Astana NDVI Time-Series (2002–2024)</h2>
+										
+										<h3>The problem</h3>
+										<p>Urban greening investments in Astana are difficult to evaluate without longitudinal spatial data. Decision-makers needed evidence of whether vegetation cover had actually improved across the city's districts over time — and where targeted interventions were still needed.</p>
+
+										<h3>The approach</h3>
+										<p>I analyzed satellite-derived NDVI data across four time points (2002, 2015, 2019, 2024) at the district level, mapping vegetation density and change patterns across Esil, Almaty, Nura, Saryarka, and Baikonyr.</p>
+
+										<h3>The result</h3>
+										<ul>
+											<li><strong>Esil District</strong> showed the strongest gains, driven by new parks and planted forest belts.</li>
+											<li><strong>Almaty District</strong> demonstrated consistent improvement across all four time points.</li>
+											<li><strong>Nura and Saryarka</strong> showed gradual vegetation recovery in peripheral zones.</li>
+											<li><strong>Baikonyr</strong>, dominated by industrial land use, remained the lowest-performing district — a clear candidate for targeted greening policy.</li>
+										</ul>
+										
+										<p>NDVI values across the city ranged from −0.1 to 0.5, establishing a quantitative baseline for ongoing monitoring. The analysis confirmed a consistent citywide greening trend over 22 years and demonstrated how remote sensing can replace assumption-based urban planning with measurable evidence.</p>
+
+										<p><strong>Stack:</strong> ArcGIS / QGIS · Sentinel-2 / Landsat · NDVI time-series analysis · Thematic cartography</p>
+									</div>
+
+									<!-- Images on the right, vertically stacked -->
+									<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 0.8em;">
+										<img src="images/2002.jfif" alt="NDVI 2002" style="max-width: 100%; height: auto;" />
+										<img src="images/2015.jfif" alt="NDVI 2015" style="max-width: 100%; height: auto;" />
+										<img src="images/2019.jfif" alt="NDVI 2019" style="max-width: 100%; height: auto;" />
+										<img src="images/2024.jfif" alt="NDVI 2024" style="max-width: 100%; height: auto;" />
+										<img src="images/2002-2024.jfif" alt="NDVI change 2002 to 2024" style="max-width: 100%; height: auto;" />
+									</div>
+
+								</div>
+							</div>
+						</section>
+
+						<!-- Gallery -->
+						<section>
+							<div class="content" style="width: 100%;">
+								<div class="inner">
+									<h2>Map Gallery</h2>
+									<p>A selection of thematic maps, spatial analysis layouts, and digitized geographic products from my work in GIS and geological mapping.</p>
+									
+									<!-- Horizontal row of 4 images -->
+									<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8em; margin-top: 2em;">
+										<img src="images/mg1.jfif" alt="Map Gallery 1" style="max-width: 100%; height: auto; display: block;" />
+										<img src="images/north4.jpg" alt="Map Gallery 2" style="max-width: 100%; height: auto; display: block;" />
+										<img src="images/zhamb3.jfif" alt="Map Gallery 3" style="max-width: 100%; height: auto; display: block;" />
+										<img src="images/kaz2.jfif" alt="Map Gallery 4" style="max-width: 100%; height: auto; display: block;" />
+									</div>
+								</div>
+							</div>
+						</section>
+					</section>
+
+				<!-- Two (Skills & Experience) -->
+					<section id="two" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>Skills & Professional Experience</h2>
+							<p>My work spans the full geospatial pipeline — from raw satellite scene to publication-ready map. I process multi-temporal SAR imagery in ESA SNAP, build automated classification workflows in Python, and deliver thematic outputs in ArcGIS and QGIS that non-specialists can actually act on.</p>
+							<p>I work at an intermediate-to-confident level across this stack and am deliberate about closing gaps quickly — I developed the chunk-based processing approach for large raster classification because the standard workflow wasn't efficient enough for the data volumes I was handling.</p>
+							
+							<div class="features">
+								<section>
+									<span class="icon solid major fa-map"></span>
+									<h3>GIS & Cartography</h3>
+									<p>Thematic map production and spatial data management in ArcGIS, QGIS, and AutoCAD. Georeferencing scanned sheets, digitizing vector layers, and building clean, print-ready layouts for both technical and non-technical audiences.</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-satellite"></span>
+									<h3>SAR & Multispectral Analysis</h3>
+									<p>End-to-end Sentinel-1 SLC processing in ESA SNAP: debursting, radiometric calibration, terrain correction, and polarimetric decomposition. NDVI time-series analysis using optical imagery for vegetation monitoring and land-use interpretation.</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-code"></span>
+									<h3>Python for Geospatial Workflows</h3>
+									<p>Supervised raster classification using scikit-learn (Random Forest), rasterio, and NumPy with chunk-based processing to handle large multi-date imagery without memory constraints. Post-classification filtering and noise reduction.</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-briefcase"></span>
+									<h3>Mineral Exploration Mapping</h3>
+									<p>Thematic map layouts and digital geographic products for the exploration and extraction of common and solid mineral resources. Subsoil licensing documentation and spatial analysis to support resource development projects.</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-chart-line"></span>
+									<h3>Spatial Analysis & Reporting</h3>
+									<p>Geospatial data analysis and written deliverables for project concept recommendations. Area development potential assessments and contribution to web mapping tool development.</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-graduation-cap"></span>
+									<h3>Education & Recognition</h3>
+									<p>B.Sc. Geography, L.N. Gumilyov Eurasian National University (2022–2025).<br>1st place, National Undergraduate Research Competition (NIRS) — awarded for original spatial research produced independently under competitive conditions.</p>
+								</section>
+							</div>
+						</div>
+					</section>
+
+				<!-- Three (Contact) -->
+					<section id="three" class="wrapper style1 fade-up">
+						<div class="inner">
+							<h2>Get in touch</h2>
+							<p>I'm open to remote roles in GIS, remote sensing, and spatial analysis — particularly projects where domain knowledge in geology or agriculture adds real value to the work. If you need precise maps, scalable raster workflows, or scalable geospatial solutions, I'd like to hear about it.</p>
+							<div class="split style1">
+								
+								<!-- Left column: Form -->
+								<section>
+									<form method="post" action="https://formspree.io/f/xkoagele">
+										<div class="fields">
+											<div class="field half">
+												<label for="name">Name</label>
+												<input type="text" name="name" id="name" required />
+											</div>
+											<div class="field half">
+												<label for="email">Email</label>
+												<input type="email" name="email" id="email" required />
+											</div>
+											<div class="field">
+												<label for="message">Message</label>
+												<textarea name="message" id="message" rows="5" required></textarea>
+											</div>
+										</div>
+										<ul class="actions">
+											<li><button type="submit" class="button submit">Send Message</button></li>
+										</ul>
+									</form>
+								</section>
+
+								<!-- Right column: Contacts -->
+								<section>
+									<ul class="contact">
+										<li>
+											<h3>Location</h3>
+											<span>Astana, Kazakhstan<br />
+											(Open to Remote)</span>
+										</li>
+										<li>
+											<h3>Email</h3>
+											<a href="mailto:anastasiamokienko28@gmail.com">anastasiamokienko28@gmail.com</a>
+										</li>
+										<li>
+											<h3>Social & Professional</h3>
+											<ul class="icons">
+												<li><a href="https://www.linkedin.com/in/anastasia-mokienko-4a57b5358" target="_blank" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+												<li><a href="https://github.com/cdtjkieghk" target="_blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+												<li><a href="https://t.me/gisprofessional" target="_blank" class="icon brands fa-telegram"><span class="label">Telegram</span></a></li>
+												<li><a href="https://wa.me/77073347209" target="_blank" class="icon brands fa-whatsapp"><span class="label">WhatsApp</span></a></li>
+											</ul>
+										</li>
+									</ul>
+								</section>
+
+							</div>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper style1-alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; Anastasia Mokienko. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
